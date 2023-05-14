@@ -1,12 +1,17 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background-image: url(images/cool-background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .container {
   max-width: 400px;
   margin: 10vh auto 0 auto;
   box-shadow: 0px 0px 43px 17px rgba(153, 153, 153, 1);
   border: thick solid;
-  
- 
 }
-
 
 #display {
   text-align: right;
@@ -19,34 +24,53 @@
 .buttons {
   display: grid;
   border-bottom: 1px solid #999;
-  border-left: 1px solid #999; /*avoid double borders*/
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-left: 1px solid #999;
+  grid-template-columns: repeat(4, 1fr);
+  perspective: 1000px;
 }
 
 .buttons > div {
   border-top: 1px solid #999;
   border-right: 1px solid #999;
+  transform-style: preserve-3d;
+  position: relative; /* add relative position for the pseudo-element */
+}
+
+.buttons > div::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.1));
+  z-index: -1; /* send the pseudo-element behind the button */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* add a shadow effect */
 }
 
 .button {
-  border: 0.5px solid #999;
+  border: none;
   line-height: 100px;
   text-align: center;
-  font-size: 25;
+  font-size: 25px;
   cursor: pointer;
-}
-
-#equal {
-  background-color: rgba(60, 108, 211, 0.979);
-  color: white;
+  transition: transform 0.5s ease-in-out;
+  background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.2));
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .button:hover {
   background-color: #323330;
   color: white;
-  transition: 0.5s ease-in-out;
+  transform: translateZ(10px);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
 }
-body {
-    background-image: url(images/cool-background.png);
-    background-size: cover;
-}   
+
+#equal {
+  font-size: 50px; /* increase the font size */
+  padding: 0 20px; /* add some padding for more visual weight */
+  border: 2px solid rgba(60, 108, 211, 0.979); /* add a border */
+  border-radius: 5px; /* round the corners of the border */
+  background-color: rgba(60, 108, 211, 0.979);
+  color: white;
+}
